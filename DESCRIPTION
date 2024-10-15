@@ -1,0 +1,18 @@
+Package: IAEpython
+Type: Package
+Title: Local configuration in the user space for python in and outside Quarto for IAE Clermont Auvergne
+Version: 0.1.0
+Author: Fabien FESCHET
+Maintainer: Fabien FESCHET <fabien.feschet@uca.fr>
+Description: This package configure a local installation in AppData of students
+  considering usage of python at the IAE Clermont Auvergne. It must be used from and outside Quarto.
+  Spyder dev environment is automatically added for python outside Quarto. A specific launch function
+  is created for easy access for the students.
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
+Imports: reticulate
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
