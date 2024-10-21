@@ -4,12 +4,20 @@
 #'
 #' @returns Either a string corresponding to a subdirectories in AppData r-reticulate package directory or NULL when ~ cannot be extended for a user.
 IAE.fn.env <- function() {
-  s <- strsplit(path.expand("~"), "/")[[1]]
-  check <- TRUE
-  check <- check && (s[1] == "C:" || s[1] == "c:")
-  check <- check && s[2] == "Users"
-  if (check) {
-    return(paste0(s[1], "/", s[2], "/", s[3], "/AppData/Local/r-reticulate/myEnv"))
+  ssif <- Sys.info()
+  if (tolower(ssif) == "windows") {
+    s <- strsplit(path.expand("~"), "/")[[1]]
+    check <- TRUE
+    check <- check && (s[1] == "C:" || s[1] == "c:")
+    check <- check && s[2] == "Users"
+    if (check) {
+      return(paste0(s[1], "/", s[2], "/", s[3], "/AppData/Local/r-reticulate/myEnv"))
+    }
+  }
+  if ((tolower(ssif) == "linux") ||
+      (tolower(ssif) == "osx")) {
+    s <- path.expand("~")
+    return(paste0(s,"/.myEnv"))
   }
   return(NULL)
 }
