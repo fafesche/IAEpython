@@ -105,8 +105,7 @@ IAE.fn.python <- function(course = NULL) {
       if (tolower(ssif["sysname"]) == "windows") { 
         system2(path.expand(paste0(IAE.env, "/", myEnv.name, "/Scripts/spyder.exe")), wait = FALSE)
       } else {
-        system2(command=path.expand(paste0(IAE.env, "/", myEnv.name, "/bin/python")),
-                args=path.expand(paste0(IAE.env, "/", myEnv.name, "/bin/spyder")), wait = FALSE)  
+        system2("spyder", wait = FALSE)  
       }
     } else {
       print("Package reticulate is mandatory. Please install it.")
