@@ -87,10 +87,13 @@ IAE.fn.python <- function(course = NULL) {
     }
     # Now charge the virtual env
     if (requireNamespace("reticulate", quietly = TRUE)) {
+      # install python (currenlty no check because install_python makes a check it self)
+      pver <- "3.12"
+      reticulate::install_python(version=pver)
       myEnv.name <- "12_IAE-M1"
       if (!reticulate::virtualenv_exists(myEnv.name)) { # Not already created so do it
         print(paste0("Create environment: ", myEnv.name))
-        reticulate::virtualenv_create(myEnv.name, python = "3.12")
+        reticulate::virtualenv_create(myEnv.name, python = pver)
       }
       print(paste0("Use python environment: ", myEnv.name))
       reticulate::use_virtualenv(myEnv.name) # Only use it
