@@ -44,7 +44,7 @@ IAE.fn.pkg_install <- function(name = "", my.env = "") {
 #' @returns Currently none formaly but TRUE or FALSE depending on the installation of the spyder package which is mandatory here.
 IAE.fn.config <- function(course = NULL, my.env = "") {
   # This depends on course list of properties
-  pkgs <- vector()
+  pkgs <- vector() # spyder complains about zmq in linux c("pyzmq")
   if (!is.null(course[["data"]])) {
     pkgs <- c(pkgs, "pandas", "numpy")
   }
@@ -101,7 +101,13 @@ IAE.fn.python <- function(course = NULL) {
       print("Configure installation adding necessary python packages.")
       IAE.fn.config(course, myEnv.name)
       # Provide a function to spyder
-      assign("spyder", function() system2(path.expand(paste0(IAE.env, "/", myEnv.name, "/Scripts/spyder.exe")), wait = FALSE), envir = .GlobalEnv)
+      ssif <- Sys.info()
+      if (tolower(ssif["sysname"]) == "windows") { 
+        system2(path.expand(paste0(IAE.env, "/", myEnv.name, "/Scripts/spyder.exe")), wait = FALSE)
+      } else {
+        system2(command=path.expand(paste0(IAE.env, "/", myEnv.name, "/bin/python")),
+                args=path.expand(paste0(IAE.env, "/", myEnv.name, "/bin/spyder")), wait = FALSE)  
+      }
     } else {
       print("Package reticulate is mandatory. Please install it.")
     }
