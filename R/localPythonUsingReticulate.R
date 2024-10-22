@@ -165,6 +165,30 @@ IAE.M1.spyder <- function() {
   print(IAE.fn.python(course.type))
 }
 
+#' .onLoad .Renviron in case it contains an http_proxy which is not allowed at the IAE
+#'
+#' Auto-configure for students. Restarting R is mandatory when needed
+.onLoad <- function() {
+  f <- path.expand("~/.Renviron")
+  myf <- file(f, open="r")
+  cnt <- readLines(myf)
+  close(myf)
+  myWhere <- charmatch(c("http_proxy", "https_proxy"), cnt)
+  if (!all(is.na(myWhere))) {
+    modOrCopy <- function(i, wh) {
+      if (i %in% wh) {
+        return(paste0("#", cnt[i]))
+      }
+      return (cnt[i])
+    }
+    cnt <- sapply(seq(from = 1, to= length(cnt)),modOrCopy, wh=myWhere)
+    myf <- file(f, open="w+")
+    cat (cnt, file=myf, sep='\n')
+    close(myf)
+    message("Proxy configuration error for IAEPython package, please restart R.")
+  }
+}
+
 ############################################################################
 #### SANBOX
 ############################################################################
