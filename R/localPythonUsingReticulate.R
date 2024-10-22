@@ -168,7 +168,7 @@ IAE.M1.spyder <- function() {
 #' .onLoad .Renviron in case it contains an http_proxy which is not allowed at the IAE
 #'
 #' Auto-configure for students. Restarting R is mandatory when needed
-.onLoad <- function() {
+.onLoad <- function(libname, pkgname) {
   f <- path.expand("~/.Renviron")
   myf <- file(f, open="r")
   cnt <- readLines(myf)
