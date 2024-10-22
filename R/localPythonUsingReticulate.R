@@ -67,7 +67,7 @@ IAE.fn.config <- function(course = NULL, my.env = "") {
 #' Use python with unload of reticulate and reload after system environment parameters correction. WORK_HOME from reticulate package is used.
 #'
 #' @param course An (optional) list of named arguments which are used to check package installation.
-#' @returns NULL if the python virtual environement was not accessible otherwise a string containing its path on disk. Should be a path inside AppData of current user.
+#' @returns NULL if the python virtual environment was not accessible otherwise a string containing its path on disk. Should be a path inside AppData of current user.
 IAE.fn.python <- function(course = NULL) {
   # Unload if necessary
   if (isNamespaceLoaded("reticulate")) {
@@ -102,10 +102,10 @@ IAE.fn.python <- function(course = NULL) {
       IAE.fn.config(course, myEnv.name)
       # Provide a function to spyder
       ssif <- Sys.info()
-      if (tolower(ssif["sysname"]) == "windows") { 
+      if (tolower(ssif["sysname"]) == "windows") {
         system2(path.expand(paste0(IAE.env, "/", myEnv.name, "/Scripts/spyder.exe")), wait = FALSE)
       } else {
-        system2("spyder", wait = FALSE)  
+        system2("spyder", wait = FALSE)
       }
     } else {
       print("Package reticulate is mandatory. Please install it.")
@@ -157,6 +157,13 @@ IAE.M1.MFI <- function() {
   print(IAE.fn.python(course.type))
 }
 
+#' Configuration for launching spyder only in the env
+#'
+#' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
+IAE.M1.spyder <- function() {
+  course.type <- list()
+  print(IAE.fn.python(course.type))
+}
 
 ############################################################################
 #### SANBOX
