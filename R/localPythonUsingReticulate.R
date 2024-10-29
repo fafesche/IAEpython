@@ -1,5 +1,8 @@
 ##### Local function to generalize script
 
+#' Fix env from ~ expansion in AppData (Windows) and ~(macOS, linux)
+#'
+#' @returns Either a string corresponding to a directory or NULL when ~ cannot be extended for a user.
 IAE.fn.env.local <- function() {
   ssif <- Sys.info()
   if (tolower(ssif["sysname"]) == "windows") {
@@ -19,6 +22,9 @@ IAE.fn.env.local <- function() {
   return(NULL)
 }
 
+#' Fix env from ~ expansion into C:
+#'
+#' @returns Either a string corresponding to a directory or NULL when ~ cannot be extended for a user.
 IAE.fn.env.global <- function() {
   ssif <- Sys.info()
   if (tolower(ssif["sysname"]) == "windows") {
@@ -40,6 +46,7 @@ IAE.fn.env.global <- function() {
 
 #' Fix env from ~ expansion
 #'
+#' @param choice: either "local" to set up in AppData (windows) of user, or "global" to set up at C:
 #' @returns Either a string corresponding to a directory or NULL when ~ cannot be extended for a user.
 IAE.fn.env <- function(choice="global") {
   choices <- list(local = IAE.fn.env.local, global = IAE.fn.env.global)
