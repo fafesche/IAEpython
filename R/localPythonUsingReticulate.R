@@ -49,7 +49,7 @@ IAE.fn.env.global <- function() {
 #' @param choice: either "local" to set up in AppData (windows) of user, or "global" to set up at C:
 #' @returns Either a string corresponding to a directory or NULL when ~ cannot be extended for a user.
 IAE.fn.env <- function(choice="global") {
-  choices <- list(local = IAEpython::IAE.fn.env.local, global = IAEpython::IAE.fn.env.global)
+  choices <- list(local = IAEpython:::IAE.fn.env.local, global = IAEpython:::IAE.fn.env.global)
   if (!is.null(choices[[choice]])) {
     return(choices[[choice]]())
   }
@@ -95,10 +95,10 @@ IAE.fn.config <- function(course = NULL, my.env = "") {
     pkgs <- c(pkgs, "ebcdic")
   }
   print(pkgs)
-  res <- sapply(pkgs, IAEpython::IAE.fn.pkg_install, my.env = my.env)
+  res <- sapply(pkgs, IAEpython:::IAE.fn.pkg_install, my.env = my.env)
   print(res)
   # Always check spyder
-  IAEpython::IAE.fn.pkg_install("spyder", my.env = my.env)
+  IAEpython:::IAE.fn.pkg_install("spyder", my.env = my.env)
 }
 
 #' Use python with unload of reticulate and reload after system environment parameters correction. WORK_HOME from reticulate package is used.
@@ -136,7 +136,7 @@ IAE.fn.python <- function(course = NULL) {
       reticulate::use_virtualenv(myEnv.name) # Only use it
       # Configure Python using packages installation
       print("Configure installation adding necessary python packages.")
-      IAEpython::IAE.fn.config(course, myEnv.name)
+      IAEpython:::IAE.fn.config(course, myEnv.name)
       # Provide a function to spyder
       ssif <- Sys.info()
       if (tolower(ssif["sysname"]) == "windows") {
@@ -160,7 +160,7 @@ IAE.M1.CCA <- function() {
   course.type[["data"]] <- TRUE
   course.type[["file"]] <- TRUE
   course.type[["FEC"]] <- TRUE
-  print(IAEpython::IAE.fn.python(course.type))
+  print(IAEpython:::IAE.fn.python(course.type))
 }
 
 #' Configuration for course in Master 1 spécialité AAC
@@ -171,7 +171,7 @@ IAE.M1.AAC <- function() {
   course.type[["data"]] <- TRUE
   course.type[["file"]] <- TRUE
   course.type[["FEC"]] <- TRUE
-  print(IAEpython::IAE.fn.python(course.type))
+  print(IAEpython:::IAE.fn.python(course.type))
 }
 
 #' Configuration for course in Master 1 spécialité Finance parcours Conformité
@@ -182,7 +182,7 @@ IAE.M1.CONFORMITE <- function() {
   course.type[["data"]] <- TRUE
   course.type[["file"]] <- TRUE
   course.type[["FEC"]] <- TRUE
-  print(IAEpython::IAE.fn.python(course.type))
+  print(IAEpython:::IAE.fn.python(course.type))
 }
 
 #' Configuration for course in Master 1 spécialité Finance parcours Marchés Financiers
@@ -194,7 +194,7 @@ IAE.M1.MFI <- function() {
   course.type[["file"]] <- TRUE
   course.type[["opt"]] <- TRUE
   course.type[["finance"]] <- TRUE
-  print(IAEpython::IAE.fn.python(course.type))
+  print(IAEpython:::IAE.fn.python(course.type))
 }
 
 #' Configuration for course in Master 1 for teacher
@@ -207,7 +207,7 @@ IAE.M1 <- function() {
   course.type[["opt"]] <- TRUE
   course.type[["finance"]] <- TRUE
   course.type[["FEC"]] <- TRUE
-  print(IAEpython::IAE.fn.python(course.type))
+  print(IAEpython:::IAE.fn.python(course.type))
 }
 
 
@@ -216,7 +216,7 @@ IAE.M1 <- function() {
 #' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
 IAE.M1.spyder <- function() {
   course.type <- list()
-  print(IAEpython::IAE.fn.python(course.type))
+  print(IAEpython:::IAE.fn.python(course.type))
 }
 
 #' .onLoad .Renviron in case it contains an http_proxy which is not allowed at the IAE
