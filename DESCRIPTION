@@ -1,7 +1,7 @@
 Package: IAEpython
 Type: Package
 Title: Local configuration in the user space for python in and outside Quarto for IAE Clermont Auvergne
-Version: 0.1.0
+Version: 1.0
 Author: Fabien FESCHET
 Maintainer: Fabien FESCHET <fabien.feschet@uca.fr>
 Description: This package configure a local installation in AppData of students
