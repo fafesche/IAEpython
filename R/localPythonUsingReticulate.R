@@ -1,9 +1,6 @@
 ##### Local function to generalize script
 
-#' Fix env from ~ expansion
-#'
-#' @returns Either a string corresponding to a subdirectories in AppData r-reticulate package directory or NULL when ~ cannot be extended for a user.
-IAE.fn.env <- function() {
+IAE.fn.env.local <- function() {
   ssif <- Sys.info()
   if (tolower(ssif["sysname"]) == "windows") {
     s <- strsplit(path.expand("~"), "/")[[1]]
@@ -18,6 +15,36 @@ IAE.fn.env <- function() {
       (tolower(ssif["sysname"]) == "osx")) {
     s <- path.expand("~")
     return(paste0(s,"/.myEnv"))
+  }
+  return(NULL)
+}
+
+IAE.fn.env.global <- function() {
+  ssif <- Sys.info()
+  if (tolower(ssif["sysname"]) == "windows") {
+    s <- strsplit(path.expand("~"), "/")[[1]]
+    check <- TRUE
+    check <- check && (s[1] == "C:" || s[1] == "c:")
+    check <- check && s[2] == "Users"
+    if (check) {
+      return(paste0(s[1], "/IAEpython/", s[3], "/myEnv"))
+    }
+  }
+  if ((tolower(ssif["sysname"]) == "linux") ||
+      (tolower(ssif["sysname"]) == "osx")) {
+    s <- path.expand("~")
+    return(paste0(s,"/.myEnv"))
+  }
+  return(NULL)
+}
+
+#' Fix env from ~ expansion
+#'
+#' @returns Either a string corresponding to a directory or NULL when ~ cannot be extended for a user.
+IAE.fn.env <- function(choice="global") {
+  choices <- list(local = IAE.fn.env.local, global = IAE.fn.env.global)
+  if (!is.null(choices[[choice]])) {
+    return(choices[[choice]]())
   }
   return(NULL)
 }
@@ -83,11 +110,11 @@ IAE.fn.python <- function(course = NULL) {
     Sys.setenv(WORKON_HOME = IAE.env)
     if (!dir.exists(IAE.env)) { # Python was not installed for sure
       print(paste0("Create directory: ", IAE.env))
-      dir.create(IAE.env)
+      dir.create(IAE.env, recursive=TRUE)
     }
     # Now charge the virtual env
     if (requireNamespace("reticulate", quietly = TRUE)) {
-      # install python (currenlty no check because install_python makes a check it self)
+      # install python (currently no check because install_python makes a check it self)
       pver <- "3.12"
       reticulate::install_python(version=pver)
       myEnv.name <- "12_IAE-M1"
