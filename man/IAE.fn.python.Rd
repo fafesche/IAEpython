@@ -10,7 +10,7 @@ IAE.fn.python(course = NULL)
 \item{course}{An (optional) list of named arguments which are used to check package installation.}
 }
 \value{
-NULL if the python virtual environement was not accessible otherwise a string containing its path on disk. Should be a path inside AppData of current user.
+NULL if the python virtual environment was not accessible otherwise a string containing its path on disk. Should be a path inside AppData of current user.
 }
 \description{
 Use python with unload of reticulate and reload after system environment parameters correction. WORK_HOME from reticulate package is used.
