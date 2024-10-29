@@ -91,6 +91,9 @@ IAE.fn.config <- function(course = NULL, my.env = "") {
   if (!is.null(course[["finance"]])) {
     pkgs <- c(pkgs, "alpha-vantage", "yfinance")
   }
+  if (!is.null(course[["FEC"]])) {
+    pkgs <- c(pkgs, "ebcdic")
+  }
   print(pkgs)
   res <- sapply(pkgs, IAE.fn.pkg_install, my.env = my.env)
   print(res)
@@ -156,6 +159,7 @@ IAE.M1.CCA <- function() {
   course.type <- list()
   course.type[["data"]] <- TRUE
   course.type[["file"]] <- TRUE
+  course.type[["FEC"]] <- TRUE
   print(IAE.fn.python(course.type))
 }
 
@@ -166,6 +170,7 @@ IAE.M1.AAC <- function() {
   course.type <- list()
   course.type[["data"]] <- TRUE
   course.type[["file"]] <- TRUE
+  course.type[["FEC"]] <- TRUE
   print(IAE.fn.python(course.type))
 }
 
@@ -176,6 +181,7 @@ IAE.M1.CONFORMITE <- function() {
   course.type <- list()
   course.type[["data"]] <- TRUE
   course.type[["file"]] <- TRUE
+  course.type[["FEC"]] <- TRUE
   print(IAE.fn.python(course.type))
 }
 
