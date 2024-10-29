@@ -12,6 +12,7 @@ License: GPL-2
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2
+Dependencies: reticulate
 Imports: reticulate
 Suggests: 
     testthat (>= 3.0.0)
