@@ -220,7 +220,7 @@ IAE.M1.spyder <- function() {
       myf <- file(f, open="w+")
       cat (cnt, file=myf, sep='\n')
       close(myf)
-      message("Proxy configuration error for IAEPython package, please restart R.")
+      packageStartupMessage("Proxy configuration error for IAEPython package, please restart R.")
     }
   }
 }
