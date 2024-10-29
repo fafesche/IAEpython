@@ -1,1 +1,5 @@
-exportPattern("^[[:alpha:]]+")
+export(IAE.M1.CCA)
+export(IAE.M1.AAC)
+export(IAE.M1.CONFORMITE)
+export(IAE.M1.MFI)
+export(IAE.M1.spyder)
