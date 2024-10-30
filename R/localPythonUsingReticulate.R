@@ -142,9 +142,9 @@ IAE.fn.python <- function(course = NULL) {
       if (tolower(ssif["sysname"]) == "windows") {
         system2(path.expand(paste0(IAE.env, "/", myEnv.name, "/Scripts/spyder.exe")), wait = FALSE)
       } else {
-        cmd <- paste0("/usr/bin/bash --rcfile <\(echo \'", 
+        cmd <- paste0("/usr/bin/bash --rcfile <(echo \'", 
                "source ", path.expand(paste0(IAE.env, "/", myEnv.name, "/bin", "/activate")), 
-               "; spyder ; exit\'\)")
+               "; spyder ; exit\')")
         print(cmd)
         system2(cmd, wait = FALSE)
       }
