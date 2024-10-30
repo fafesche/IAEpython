@@ -148,7 +148,7 @@ IAE.fn.python <- function(course = NULL) {
         #       "; spyder ; exit')")
         #print(cmd)
         #system2(cmd, wait = FALSE)
-        py_run_string("from spyder.app.start import main\n\nmain()")
+        reticulate::py_run_string("from spyder.app.start import main\n\nmain()")
       }
     } else {
       print("Package reticulate is mandatory. Please install it.")
