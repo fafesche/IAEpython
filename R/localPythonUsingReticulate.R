@@ -144,7 +144,7 @@ IAE.fn.python <- function(course = NULL) {
       } else {
         cmd <- paste0("/usr/bin/bash --rcfile <(echo '", 
                "source ", path.expand(paste0(IAE.env, "/", myEnv.name, "/bin", "/activate")), 
-               "; spyder)'")
+               "; spyder ; exit')")
         print(cmd)
         system2(cmd, wait = FALSE)
       }
@@ -225,7 +225,9 @@ IAE.M1.spyder <- function() {
 
 #' .onLoad .Renviron in case it contains an http_proxy which is not allowed at the IAE
 #'
-#' Auto-configure for students. Restarting R is mandatory when needed
+#' @param libname: name of the lib
+#' @param pkgname: name of the package
+#' @returns Message for restarting R when invalid proxy are found at the IAE.
 .onLoad <- function(libname, pkgname) {
   f <- path.expand("~/.Renviron")
   if (file.exists(f)) {
