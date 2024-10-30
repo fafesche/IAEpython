@@ -143,7 +143,7 @@ IAE.fn.python <- function(course = NULL) {
         system2(path.expand(paste0(IAE.env, "/", myEnv.name, "/Scripts/spyder.exe")), wait = FALSE)
       } else {
         cmd <- paste0("/usr/bin/bash --rcfile <(echo '", 
-               "source ", path.expand(paste0(IAE.env, "/", myEnv.name, "/bin/activate")), 
+               "source ", path.expand(paste0(IAE.env, "/", myEnv.name, "/bin", "/activate")), 
                "; spyder)'")
         print(cmd)
         system2(cmd, wait = FALSE)
