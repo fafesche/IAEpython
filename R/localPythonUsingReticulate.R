@@ -148,7 +148,7 @@ IAE.fn.python <- function(course = NULL) {
         #       "; spyder ; exit')")
         #print(cmd)
         #system2(cmd, wait = FALSE)
-        reticulate::py_run_file("/home/fafesche/.myEnv/12_IAE-M1/bin/spyder")
+        message("/home/fafesche/.myEnv/12_IAE-M1/bin/spyder cannot be run in linux directly, sorry.")
       }
     } else {
       print("Package reticulate is mandatory. Please install it.")
