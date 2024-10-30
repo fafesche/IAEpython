@@ -113,7 +113,7 @@ IAE.fn.python <- function(course = NULL) {
   }
   # Prepare env by building and check
   print("Check local environment.")
-  IAE.env <- IAE.fn.env()
+  IAE.env <- IAEpython:::IAE.fn.env()
   if (!is.null(IAE.env)) {
     print(paste0("     Choose: ", IAE.env))
     # Set global env
