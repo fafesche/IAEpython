@@ -145,6 +145,8 @@ IAE.fn.python <- function(course = NULL) {
         cmd <- paste0("/usr/bin/bash --rcfile <(echo '", 
                "source ", path.expand(paste0(IAE.env, "/", myEnv.name, "/bin", "/activate")), 
                "; spyder ; exit')")
+        cmd <- paste0("source ", path.expand(paste0(IAE.env, "/", myEnv.name, "/bin", "/activate")), 
+                      "; spyder")
         print(cmd)
         system2(cmd, wait = FALSE)
       }
