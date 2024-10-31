@@ -7,9 +7,9 @@
 .onLoad(libname, pkgname)
 }
 \arguments{
-\item{libname:}{name of the lib}
+\item{libname}{name of the lib}
 
-\item{pkgname:}{name of the package}
+\item{pkgname}{name of the package}
 }
 \value{
 Message for restarting R when invalid proxy are found at the IAE.

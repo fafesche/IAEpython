@@ -4,10 +4,12 @@
 \alias{IAE.fn.python}
 \title{Use python with unload of reticulate and reload after system environment parameters correction. WORK_HOME from reticulate package is used.}
 \usage{
-IAE.fn.python(course = NULL)
+IAE.fn.python(course = NULL, spyder = TRUE)
 }
 \arguments{
 \item{course}{An (optional) list of named arguments which are used to check package installation.}
+
+\item{spyder}{a boolean to launch or not spyder (default is TRUE)}
 }
 \value{
 NULL if the python virtual environment was not accessible otherwise a string containing its path on disk. Should be a path inside AppData of current user.
