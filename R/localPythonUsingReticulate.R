@@ -139,17 +139,19 @@ IAE.fn.python <- function(course = NULL, spyder = TRUE) {
       print("Configure installation adding necessary python packages.")
       IAE.fn.config(course, myEnv.name)
       # Provide a function to spyder
-      ssif <- Sys.info()
-      if (tolower(ssif["sysname"]) == "windows") {
-        system2(path.expand(paste0(IAE.env, "/", myEnv.name, "/Scripts/spyder.exe")), wait = FALSE)
-      } else {
-        # Should work but does not
-        #cmd <- paste0("/usr/bin/bash --rcfile <(echo '",
-        #       "source ", path.expand(paste0(IAE.env, "/", myEnv.name, "/bin", "/activate")),
-        #       "; spyder ; exit')")
-        #print(cmd)
-        #system2(cmd, wait = FALSE)
-        message("/home/fafesche/.myEnv/12_IAE-M1/bin/spyder cannot be run in linux directly, sorry.")
+      if (spyder) {
+        ssif <- Sys.info()
+        if (tolower(ssif["sysname"]) == "windows") {
+          system2(path.expand(paste0(IAE.env, "/", myEnv.name, "/Scripts/spyder.exe")), wait = FALSE)
+        } else {
+          # Should work but does not
+          #cmd <- paste0("/usr/bin/bash --rcfile <(echo '",
+          #       "source ", path.expand(paste0(IAE.env, "/", myEnv.name, "/bin", "/activate")),
+          #       "; spyder ; exit')")
+          #print(cmd)
+          #system2(cmd, wait = FALSE)
+          message("/home/fafesche/.myEnv/12_IAE-M1/bin/spyder cannot be run in linux directly, sorry.")
+        }
       }
     } else {
       print("Package reticulate is mandatory. Please install it.")
