@@ -143,8 +143,8 @@ IAE.fn.python <- function(course = NULL) {
         system2(path.expand(paste0(IAE.env, "/", myEnv.name, "/Scripts/spyder.exe")), wait = FALSE)
       } else {
         # Should work but does not
-        #cmd <- paste0("/usr/bin/bash --rcfile <(echo '", 
-        #       "source ", path.expand(paste0(IAE.env, "/", myEnv.name, "/bin", "/activate")), 
+        #cmd <- paste0("/usr/bin/bash --rcfile <(echo '",
+        #       "source ", path.expand(paste0(IAE.env, "/", myEnv.name, "/bin", "/activate")),
         #       "; spyder ; exit')")
         #print(cmd)
         #system2(cmd, wait = FALSE)
@@ -206,7 +206,7 @@ IAE.M1.MFI <- function() {
 #' Configuration for course in Master 1 for teacher
 #'
 #' Auto-configure, installation of necessary packages are done as needed.
-IAE.M1 <- function() {
+IAE.M1.teacher <- function() {
   course.type <- list()
   course.type[["data"]] <- TRUE
   course.type[["file"]] <- TRUE
@@ -216,6 +216,13 @@ IAE.M1 <- function() {
   print(IAEpython:::IAE.fn.python(course.type))
 }
 
+#' Configuration for launching spyder only in the env
+#'
+#' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
+IAE.M1 <- function() {
+  course.type <- list()
+  print(IAEpython:::IAE.fn.python(course.type, FALSE))
+}
 
 #' Configuration for launching spyder only in the env
 #'

@@ -2,10 +2,10 @@
 % Please edit documentation in R/localPythonUsingReticulate.R
 \name{IAE.M1}
 \alias{IAE.M1}
-\title{Configuration for course in Master 1 for teacher}
+\title{Configuration for launching spyder only in the env}
 \usage{
 IAE.M1()
 }
 \description{
-Auto-configure, installation of necessary packages are done as needed.
+Auto-configure for students in their AppData, installation of necessary packages are done as needed.
 }
