@@ -78,9 +78,9 @@ IAE.fn.pkg_install <- function(name = "", my.env = "") {
 #' @returns Currently none formaly but TRUE or FALSE depending on the installation of the spyder package which is mandatory here.
 IAE.fn.config <- function(course = NULL, my.env = "") {
   # This depends on course list of properties
-  pkgs <- vector() # spyder complains about zmq in linux c("pyzmq")
+  pkgs <- vector()
   if (!is.null(course[["data"]])) {
-    pkgs <- c(pkgs, "pandas", "numpy")
+    pkgs <- c(pkgs, "pandas", "numpy", "matplotlib", "seaborn")
   }
   if (!is.null(course[["file"]])) {
     pkgs <- c(pkgs, "pathlib")
