@@ -82,17 +82,26 @@ IAE.fn.config <- function(course = NULL, my.env = "") {
   if (!is.null(course[["data"]])) {
     pkgs <- c(pkgs, "pandas", "numpy", "matplotlib", "seaborn")
   }
+  if (!is.null(course[["visu"]])) {
+    pkgs <- c(pkgs, "matplotlib", "seaborn")
+  }
   if (!is.null(course[["file"]])) {
     pkgs <- c(pkgs, "pathlib")
   }
   if (!is.null(course[["opt"]])) {
     pkgs <- c(pkgs, "scipy")
   }
+  if (!is.null(course[["stat"]])) {
+    pkgs <- c(pkgs, "statsmodels")
+  }
+  if (!is.null(course[["ts"]])) {
+    pkgs <- c(pkgs, "tslearn", "autots", "prophet")
+  }  
   if (!is.null(course[["finance"]])) {
-    pkgs <- c(pkgs, "alpha-vantage", "yfinance", "statsmodels")
+    pkgs <- c(pkgs, "alpha-vantage", "yfinance")
   }
   if (!is.null(course[["ml"]])) {
-    pkgs <- c(pkgs, "scikit-learn")
+    pkgs <- c(pkgs, "scikit-learn","xgboost")
   }
   if (!is.null(course[["FEC"]])) {
     pkgs <- c(pkgs, "ebcdic")
@@ -233,7 +242,7 @@ IAE.M1 <- function() {
 #' Configuration for launching spyder only in the env
 #'
 #' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
-IAE.M1.spyder <- function() {
+IAE.spyder <- function() {
   course.type <- list()
   print(IAE.fn.python(course.type))
 }
