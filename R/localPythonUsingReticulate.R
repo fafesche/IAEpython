@@ -89,7 +89,10 @@ IAE.fn.config <- function(course = NULL, my.env = "") {
     pkgs <- c(pkgs, "scipy")
   }
   if (!is.null(course[["finance"]])) {
-    pkgs <- c(pkgs, "alpha-vantage", "yfinance")
+    pkgs <- c(pkgs, "alpha-vantage", "yfinance", "statsmodels")
+  }
+  if (!is.null(course[["ml"]])) {
+    pkgs <- c(pkgs, "scikit-learn")
   }
   if (!is.null(course[["FEC"]])) {
     pkgs <- c(pkgs, "ebcdic")
