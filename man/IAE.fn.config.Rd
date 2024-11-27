@@ -2,7 +2,7 @@
 % Please edit documentation in R/localPythonUsingReticulate.R
 \name{IAE.fn.config}
 \alias{IAE.fn.config}
-\title{Configure python using list of functionalities.}
+\title{Configure python using list of field.}
 \usage{
 IAE.fn.config(course = NULL, my.env = "")
 }
@@ -15,5 +15,5 @@ IAE.fn.config(course = NULL, my.env = "")
 Currently none formaly but TRUE or FALSE depending on the installation of the spyder package which is mandatory here.
 }
 \description{
-Configure python using list of functionalities.
+Configure python using list of field.
 }
