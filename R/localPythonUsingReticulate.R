@@ -71,44 +71,32 @@ IAE.fn.pkg_install <- function(name = "", my.env = "") {
   return(FALSE)
 }
 
-#' Configure python using list of functionalities.
+#' Configure python using list of field.
 #'
 #' @param course An (optional) list of named arguments which are used to check package installation.
 #' @param my.env An optional virtual environment for the python local installation.
 #' @returns Currently none formaly but TRUE or FALSE depending on the installation of the spyder package which is mandatory here.
 IAE.fn.config <- function(course = NULL, my.env = "") {
-  # This depends on course list of properties
-  pkgs <- vector()
-  if (!is.null(course[["data"]])) {
-    pkgs <- c(pkgs, "pandas", "numpy", "matplotlib", "seaborn")
-  }
-  if (!is.null(course[["visu"]])) {
-    pkgs <- c(pkgs, "matplotlib", "seaborn")
-  }
-  if (!is.null(course[["file"]])) {
-    pkgs <- c(pkgs, "pathlib")
-  }
-  if (!is.null(course[["opt"]])) {
-    pkgs <- c(pkgs, "scipy")
-  }
-  if (!is.null(course[["stat"]])) {
-    pkgs <- c(pkgs, "statsmodels")
-  }
-  if (!is.null(course[["ts"]])) {
-    pkgs <- c(pkgs, "tslearn", "autots", "prophet")
-  }  
-  if (!is.null(course[["finance"]])) {
-    pkgs <- c(pkgs, "alpha-vantage", "yfinance")
-  }
-  if (!is.null(course[["ml"]])) {
-    pkgs <- c(pkgs, "scikit-learn","xgboost")
-  }
-  if (!is.null(course[["FEC"]])) {
-    pkgs <- c(pkgs, "ebcdic")
-  }
+  # Courses list of properties
+  packages <- list(data=list("pandas", "numpy"),
+                   visu=list("matplotlib", "seaborn"),
+                   file=list("pathlib"),
+                   opt=list("scipy"),
+                   stat=list("statsmodels"),
+                   ts=list("tslearn", "autots", "prophet"),
+                   finance=list("alpha-vantage", "yfinance"),
+                   ml=list("scikit-learn","xgboost"),
+                   FEC=list("ebcdic")
+                   )
+  if (!is.null(course))
+    pkgs <- unlist(lapply(course,function(x) packages[[x]]))
+  else
+    pkgs <- unlist(packages)
   print(pkgs)
-  res <- sapply(pkgs, IAE.fn.pkg_install, my.env = my.env)
-  print(res)
+  if (!is.null(pkgs)) {
+    res <- sapply(pkgs, IAE.fn.pkg_install, my.env = my.env)
+    print(res)
+  }
   # Always check spyder
   IAE.fn.pkg_install("spyder", my.env = my.env)
 }
@@ -177,10 +165,7 @@ IAE.fn.python <- function(course = NULL, spyder = TRUE) {
 #'
 #' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
 IAE.M1.CCA <- function() {
-  course.type <- list()
-  course.type[["data"]] <- TRUE
-  course.type[["file"]] <- TRUE
-  course.type[["FEC"]] <- TRUE
+  course.type <- list("data","file","FEC")
   print(IAE.fn.python(course.type))
 }
 
@@ -188,10 +173,7 @@ IAE.M1.CCA <- function() {
 #'
 #' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
 IAE.M1.AAC <- function() {
-  course.type <- list()
-  course.type[["data"]] <- TRUE
-  course.type[["file"]] <- TRUE
-  course.type[["FEC"]] <- TRUE
+  course.type <- list("data","file","FEC")
   print(IAE.fn.python(course.type))
 }
 
@@ -199,10 +181,7 @@ IAE.M1.AAC <- function() {
 #'
 #' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
 IAE.M1.CONFORMITE <- function() {
-  course.type <- list()
-  course.type[["data"]] <- TRUE
-  course.type[["file"]] <- TRUE
-  course.type[["FEC"]] <- TRUE
+  course.type <- list("data","file","FEC")
   print(IAE.fn.python(course.type))
 }
 
@@ -210,36 +189,34 @@ IAE.M1.CONFORMITE <- function() {
 #'
 #' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
 IAE.M1.MFI <- function() {
-  course.type <- list()
-  course.type[["data"]] <- TRUE
-  course.type[["file"]] <- TRUE
-  course.type[["opt"]] <- TRUE
-  course.type[["finance"]] <- TRUE
+  course.type <- list("data","file","opt","finance","ts")
   print(IAE.fn.python(course.type))
 }
 
-#' Configuration for course in Master 1 for teacher
-#'
-#' Auto-configure, installation of necessary packages are done as needed.
-IAE.M1.teacher <- function() {
-  course.type <- list()
-  course.type[["data"]] <- TRUE
-  course.type[["file"]] <- TRUE
-  course.type[["opt"]] <- TRUE
-  course.type[["finance"]] <- TRUE
-  course.type[["FEC"]] <- TRUE
-  print(IAE.fn.python(course.type))
-}
-
-#' Configuration for launching spyder only in the env
+#' Configuration for course in Master 2 Finance spécialités Marchés Financiers
 #'
 #' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
-IAE.M1 <- function() {
-  course.type <- list()
-  print(IAE.fn.python(course.type, FALSE))
+IAE.M2.MFI <- function() {
+  course.type <- list("data","file","opt","finance","ts")
+  print(IAE.fn.python(course.type))
 }
 
-#' Configuration for launching spyder only in the env
+#' Configuration for course for teacher
+#'
+#' Auto-configure, installation of necessary packages are done as needed.
+IAE.teacher <- function() {
+  print(IAE.fn.python())
+}
+
+#' Configuration without launching spyder for use in quarto
+#'
+#' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
+IAE.quarto <- function() {
+  course.type <- list()
+  print(IAE.fn.python(course.type, spyder=FALSE))
+}
+
+#' Configuration foronly launching spyder in the env
 #'
 #' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
 IAE.spyder <- function() {
