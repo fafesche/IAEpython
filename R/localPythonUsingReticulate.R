@@ -147,7 +147,7 @@ IAE.fn.python <- function(course = NULL, spyder = TRUE) {
 	  # Must set R_USER_DATA_DIR to force python install outside AppData
 	  Sys.setenv(R_USER_DATA_DIR = IAE.base)
       # install python (currently no check because install_python makes a check it self and update if necessary)
-      pver <- "3.12"
+      pver <- "3.12.7"
       reticulate::install_python(version=pver)
       myEnv.name <- "12_IAE-M1"
       if (!reticulate::virtualenv_exists(myEnv.name)) { # Not already created so do it
