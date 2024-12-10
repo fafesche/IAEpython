@@ -134,8 +134,8 @@ IAE.fn.python <- function(course = NULL, spyder = TRUE) {
   if (!is.null(IAE.env)) {
     print(paste0("     Choose: ", IAE.env))
     # Library for local load
-	IAE.base <- paste0(IAE.fn.env(full=FALSE),"/library")
-    IAE.lib <- paste0(IAE.base,"/",paste(R.version$major,sub("\\..*$", "", R.version$minor),sep="."))
+	IAE.base <- IAE.fn.env(full=FALSE)
+    IAE.lib <- paste0(IAE.base,"/library/",paste(R.version$major,sub("\\..*$", "", R.version$minor),sep="."))
     # Set global env
     Sys.setenv(WORKON_HOME = IAE.env)
     if (!dir.exists(IAE.env)) { # Python was not installed for sure
