@@ -134,7 +134,8 @@ IAE.fn.python <- function(course = NULL, spyder = TRUE) {
   if (!is.null(IAE.env)) {
     print(paste0("     Choose: ", IAE.env))
     # Library for local load
-    IAE.lib <- paste0(IAE.fn.env(full=FALSE),"/library/",paste(R.version$major,sub("\\..*$", "", R.version$minor),sep="."))
+	IAE.base <- paste0(IAE.fn.env(full=FALSE),"/library")
+    IAE.lib <- paste0(IAE.base,"/",paste(R.version$major,sub("\\..*$", "", R.version$minor),sep="."))
     # Set global env
     Sys.setenv(WORKON_HOME = IAE.env)
     if (!dir.exists(IAE.env)) { # Python was not installed for sure
@@ -143,7 +144,9 @@ IAE.fn.python <- function(course = NULL, spyder = TRUE) {
     }
     # Now charge the virtual env
     if (requireNamespace("reticulate", quietly = TRUE, lib=IAE.lib)) {
-      # install python (currently no check because install_python makes a check it self)
+	  # Must set R_USER_DATA_DIR to force python install outside AppData
+	  Sys.setenv(R_USER_DATA_DIR = IAE.base)
+      # install python (currently no check because install_python makes a check it self and update if necessary)
       pver <- "3.12"
       reticulate::install_python(version=pver)
       myEnv.name <- "12_IAE-M1"
