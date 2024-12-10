@@ -142,7 +142,7 @@ IAE.fn.python <- function(course = NULL, spyder = TRUE) {
       dir.create(IAE.env, recursive=TRUE)
     }
     # Now charge the virtual env
-    if (requireNamespace("reticulate", quietly = TRUE, lib.loc=IAE.lib)) {
+    if (requireNamespace("reticulate", quietly = TRUE, lib=IAE.lib)) {
       # install python (currently no check because install_python makes a check it self)
       pver <- "3.12"
       reticulate::install_python(version=pver)
