@@ -4,7 +4,10 @@
 \alias{IAE.fn.env.local}
 \title{Fix env from ~ expansion in AppData (Windows) and ~(macOS, linux)}
 \usage{
-IAE.fn.env.local()
+IAE.fn.env.local(full)
+}
+\arguments{
+\item{full}{boolean. TRUE means complete name, FALSE means only main path}
 }
 \value{
 Either a string corresponding to a directory or NULL when ~ cannot be extended for a user.

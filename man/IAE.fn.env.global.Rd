@@ -4,7 +4,10 @@
 \alias{IAE.fn.env.global}
 \title{Fix env from ~ expansion into C:}
 \usage{
-IAE.fn.env.global()
+IAE.fn.env.global(full)
+}
+\arguments{
+\item{full}{boolean. TRUE means complete name, FALSE means only main path}
 }
 \value{
 Either a string corresponding to a directory or NULL when ~ cannot be extended for a user.

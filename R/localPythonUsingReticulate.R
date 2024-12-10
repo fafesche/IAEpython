@@ -2,8 +2,9 @@
 
 #' Fix env from ~ expansion in AppData (Windows) and ~(macOS, linux)
 #'
+#' @param full boolean. TRUE means complete name, FALSE means only main path
 #' @returns Either a string corresponding to a directory or NULL when ~ cannot be extended for a user.
-IAE.fn.env.local <- function() {
+IAE.fn.env.local <- function(full) {
   ssif <- Sys.info()
   if (tolower(ssif["sysname"]) == "windows") {
     s <- strsplit(path.expand("~"), "/")[[1]]
@@ -11,21 +12,29 @@ IAE.fn.env.local <- function() {
     check <- check && (s[1] == "C:" || s[1] == "c:")
     check <- check && s[2] == "Users"
     if (check) {
-      return(paste0(s[1], "/", s[2], "/", s[3], "/AppData/Local/r-reticulate/myEnv"))
+      if (full) {
+        return(paste0(s[1], "/", s[2], "/", s[3], "/AppData/Local/r-reticulate/myEnv"))
+      } else {
+        return(paste0(s[1], "/", s[2], "/", s[3], "/AppData/Local/r-reticulate"))
+      }
     }
   }
   if ((tolower(ssif["sysname"]) == "linux") ||
       (tolower(ssif["sysname"]) == "osx")) {
     s <- path.expand("~")
-    return(paste0(s,"/.myEnv"))
+    if (full)
+      return(paste0(s,"/.myEnv"))
+    else
+      return(s)
   }
   return(NULL)
 }
 
 #' Fix env from ~ expansion into C:
 #'
+#' @param full boolean. TRUE means complete name, FALSE means only main path
 #' @returns Either a string corresponding to a directory or NULL when ~ cannot be extended for a user.
-IAE.fn.env.global <- function() {
+IAE.fn.env.global <- function(full) {
   ssif <- Sys.info()
   if (tolower(ssif["sysname"]) == "windows") {
     s <- strsplit(path.expand("~"), "/")[[1]]
@@ -33,13 +42,19 @@ IAE.fn.env.global <- function() {
     check <- check && (s[1] == "C:" || s[1] == "c:")
     check <- check && s[2] == "Users"
     if (check) {
-      return(paste0(s[1], "/IAEpython/", s[3], "/myEnv"))
+      if (full)
+        return(paste0(s[1], "/IAEpython/", s[3], "/myEnv"))
+      else
+        return(paste0(s[1], "/IAEpython/", s[3]))
     }
   }
   if ((tolower(ssif["sysname"]) == "linux") ||
       (tolower(ssif["sysname"]) == "osx")) {
     s <- path.expand("~")
-    return(paste0(s,"/.myEnv"))
+    if (full)
+      return(paste0(s,"/.myEnv"))
+    else
+      return(s)
   }
   return(NULL)
 }
@@ -47,11 +62,12 @@ IAE.fn.env.global <- function() {
 #' Fix env from ~ expansion
 #'
 #' @param choice either "local" to set up in AppData (windows) of user, or "global" to set up at C:
+#' @param full (optional, default is TRUE), set to TRUE to get complete path, to false to have main path only
 #' @returns Either a string corresponding to a directory or NULL when ~ cannot be extended for a user.
-IAE.fn.env <- function(choice="global") {
+IAE.fn.env <- function(choice="global", full=TRUE) {
   choices <- list(local = IAE.fn.env.local, global = IAE.fn.env.global)
   if (!is.null(choices[[choice]])) {
-    return(choices[[choice]]())
+    return(choices[[choice]](full))
   }
   return(NULL)
 }
@@ -117,6 +133,8 @@ IAE.fn.python <- function(course = NULL, spyder = TRUE) {
   IAE.env <- IAE.fn.env()
   if (!is.null(IAE.env)) {
     print(paste0("     Choose: ", IAE.env))
+    # Library for local load
+    IAE.lib <- paste0(IAE.fn.env(full=FALSE),"/library")
     # Set global env
     Sys.setenv(WORKON_HOME = IAE.env)
     if (!dir.exists(IAE.env)) { # Python was not installed for sure
@@ -124,7 +142,7 @@ IAE.fn.python <- function(course = NULL, spyder = TRUE) {
       dir.create(IAE.env, recursive=TRUE)
     }
     # Now charge the virtual env
-    if (requireNamespace("reticulate", quietly = TRUE)) {
+    if (requireNamespace("reticulate", quietly = TRUE, lib.loc=IAE.lib)) {
       # install python (currently no check because install_python makes a check it self)
       pver <- "3.12"
       reticulate::install_python(version=pver)

@@ -4,10 +4,12 @@
 \alias{IAE.fn.env}
 \title{Fix env from ~ expansion}
 \usage{
-IAE.fn.env(choice = "global")
+IAE.fn.env(choice = "global", full = TRUE)
 }
 \arguments{
 \item{choice}{either "local" to set up in AppData (windows) of user, or "global" to set up at C:}
+
+\item{full}{(optional, default is TRUE), set to TRUE to get complete path, to false to have main path only}
 }
 \value{
 Either a string corresponding to a directory or NULL when ~ cannot be extended for a user.
