@@ -114,6 +114,10 @@ IAE.fn.config <- function(course = NULL, my.env = "") {
     print(res)
   }
   # Always check spyder
+  # Currently Spyder depends on jellyfish but last version requieres cargo (rust) updates as a dependency
+  # So jellyfish does not install correctly must switch to an old version before installing spyder
+  IAE.fn.pkg_install("jellyfish==1.0.4", my.env = my.env)
+  # Then spyder should install correctly
   IAE.fn.pkg_install("spyder", my.env = my.env)
 }
 
