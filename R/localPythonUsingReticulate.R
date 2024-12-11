@@ -43,9 +43,9 @@ IAE.fn.env.global <- function(full) {
     check <- check && s[2] == "Users"
     if (check) {
       if (full)
-        return(paste0(s[1], "/IAEpython/", s[3], "/myEnv"))
+        return(paste0(s[1], paste0("/IAEpython","_",s[3]), "/myEnv"))
       else
-        return(paste0(s[1], "/IAEpython/", s[3]))
+        return(paste0(s[1], paste0("/IAEpython","_",s[3])))
     }
   }
   if ((tolower(ssif["sysname"]) == "linux") ||
@@ -89,29 +89,22 @@ IAE.fn.pkg_install <- function(name = "", my.env = "") {
 
 #' Configure python using list of field.
 #'
-#' @param course An (optional) list of named arguments which are used to check package installation.
+#' @param course An (optional) named argument to check package installation.
 #' @param my.env An optional virtual environment for the python local installation.
-#' @returns Currently none formaly but TRUE or FALSE depending on the installation of the spyder package which is mandatory here.
-IAE.fn.config <- function(course = NULL, my.env = "") {
-  # Courses list of properties
-  packages <- list(data=list("pandas", "numpy"),
-                   visu=list("matplotlib", "seaborn"),
-                   file=list("pathlib"),
-                   opt=list("scipy"),
-                   stat=list("statsmodels"),
-                   ts=list("tslearn", "autots", "prophet"),
-                   finance=list("alpha-vantage", "yfinance"),
-                   ml=list("scikit-learn","xgboost"),
-                   FEC=list("ebcdic")
-                   )
-  if (!is.null(course))
-    pkgs <- unlist(lapply(course,function(x) packages[[x]]))
-  else
-    pkgs <- unlist(packages)
-  print(pkgs)
-  if (!is.null(pkgs)) {
-    res <- sapply(pkgs, IAE.fn.pkg_install, my.env = my.env)
-    print(res)
+#' @returns None
+IAE.fn.config <- function(course = "ALL.ALL", my.env = "") {
+  # Load config file
+  IAE.base <- IAE.fn.env(full=FALSE)
+  config <- read.csv2(paste(IAE.base,"configIAEpython",sep="/"),sep='|',encoding='UTF-8',fileEncoding='UTF-8')
+  # Get packages list
+  if (course %in% names(config)) {
+	  packagesCross <- as.data.frame(apply(config[course],2,function (x) gsub("[[:space:]]", "", x)))
+	  pkgs<-gsub("[[:space:]]", "", config[packagesCross[course]=='X','Packages'])
+	  print(pkgs)
+	  if (!is.null(pkgs)) {
+		res <- sapply(pkgs, IAE.fn.pkg_install, my.env = my.env)
+		print(res)
+	  }
   }
   # Always check spyder
   # Currently Spyder depends on jellyfish but last version requieres cargo (rust) updates as a dependency
@@ -140,6 +133,9 @@ IAE.fn.python <- function(course = NULL, spyder = TRUE) {
     # Library for local load
 	IAE.base <- IAE.fn.env(full=FALSE)
     IAE.lib <- paste0(IAE.base,"/library/",paste(R.version$major,sub("\\..*$", "", R.version$minor),sep="."))
+	# Get general configuration file from main source
+    options(timeout = max(15, getOption("timeout")))  # Short timeout
+    download.file("https://cloud.data-auvergne.fr/dataLearning/configIAEpython",paste(IAE.base,"configIAEpython",sep="/"))
     # Set global env
     Sys.setenv(WORKON_HOME = IAE.env)
     if (!dir.exists(IAE.env)) { # Python was not installed for sure
@@ -153,7 +149,7 @@ IAE.fn.python <- function(course = NULL, spyder = TRUE) {
       # install python (currently no check because install_python makes a check it self and update if necessary)
       pver <- "3.12.7"
       reticulate::install_python(version=pver)
-      myEnv.name <- "12_IAE-M1"
+      myEnv.name <- "12_IAE"
       if (!reticulate::virtualenv_exists(myEnv.name)) { # Not already created so do it
         print(paste0("Create environment: ", myEnv.name))
         reticulate::virtualenv_create(myEnv.name, python = pver)
@@ -175,7 +171,7 @@ IAE.fn.python <- function(course = NULL, spyder = TRUE) {
           #       "; spyder ; exit')")
           #print(cmd)
           #system2(cmd, wait = FALSE)
-          message("/home/fafesche/.myEnv/12_IAE-M1/bin/spyder cannot be run in linux directly, sorry.")
+          message("/home/fafesche/.myEnv/12_IAE/bin/spyder cannot be run in linux directly, sorry.")
         }
       }
     } else {
