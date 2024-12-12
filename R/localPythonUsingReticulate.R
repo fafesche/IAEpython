@@ -37,6 +37,7 @@ IAE.fn.env.local <- function(full) {
 IAE.fn.env.global <- function(full) {
   print("Global installation.")
   ssif <- Sys.info()
+  print(ssif)
   if (tolower(ssif["sysname"]) == "windows") {
     s <- strsplit(path.expand("~"), "/")[[1]]
     check <- TRUE
