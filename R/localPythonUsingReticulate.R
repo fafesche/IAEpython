@@ -189,56 +189,56 @@ IAE.fn.python <- function(course = '.', spyder = TRUE) {
 #'
 #' Auto-configure for students, installation of necessary packages are done as needed.
 IAE.M1.CCA <- function() {
-  print(IAE.fn.python("M1.CCA"))
+  print(IAE.fn.python(course="M1.CCA"))
 }
 
 #' Configuration for course in Master 1 spécialité AAC
 #'
 #' Auto-configure for students, installation of necessary packages are done as needed.
 IAE.M1.AAC <- function() {
-  print(IAE.fn.python("M1.AAC"))
+  print(IAE.fn.python(course="M1.AAC"))
 }
 
 #' Configuration for course in Master 1 spécialité Finance parcours Conformité
 #'
 #' Auto-configure for students, installation of necessary packages are done as needed.
 IAE.M1.CONFORMITE <- function() {
-  print(IAE.fn.python("M1.CONFORMITE"))
+  print(IAE.fn.python(course="M1.CONFORMITE"))
 }
 
 #' Configuration for course in Master 1 spécialité Finance parcours Marchés Financiers
 #'
 #' Auto-configure for students, installation of necessary packages are done as needed.
 IAE.M1.MFI <- function() {
-  print(IAE.fn.python("M1.MFI"))
+  print(IAE.fn.python(course="M1.MFI"))
 }
 
 #' Configuration for course in Master 2 Finance spécialités Marchés Financiers
 #'
 #' Auto-configure for students, installation of necessary packages are done as needed.
 IAE.M2.MFI <- function() {
-  print(IAE.fn.python("M2.MFI"))
+  print(IAE.fn.python(course="M2.MFI"))
 }
 
 #' Configuration for course for teacher
 #'
 #' Auto-configure, installation of necessary packages are done as needed.
 IAE.teacher <- function() {
-  print(IAE.fn.python())
+  print(IAE.fn.python(course="ALL.ALL"))
 }
 
 #' Configuration without launching spyder for use in quarto
 #'
 #' Auto-configure for students
 IAE.quarto <- function() {
-  print(IAE.fn.python(".", spyder=FALSE))
+  print(IAE.fn.python(course=".", spyder=FALSE))
 }
 
 #' Configuration foronly launching spyder in the env
 #'
 #' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
 IAE.spyder <- function() {
-  print(IAE.fn.python('.'))
+  print(IAE.fn.python(course="."))
 }
 
 #' .onLoad .Renviron in case it contains an http_proxy which is not allowed at the IAE
