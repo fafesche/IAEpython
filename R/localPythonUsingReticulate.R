@@ -7,7 +7,7 @@
 IAE.fn.env.local <- function(full) {
   ssif <- Sys.info()
   if (tolower(ssif["sysname"]) == "windows") {
-    s <- strsplit(path.expand("~"), "/")[[1]]
+    s <- strsplit(path.expand("~"), "/")[[1]] # Not working on Rscript in PowerShell (see global) TODO
     check <- TRUE
     check <- check && (s[1] == "C:" || s[1] == "c:")
     check <- check && s[2] == "Users"
@@ -38,7 +38,8 @@ IAE.fn.env.global <- function(full) {
   print("Global installation.")
   ssif <- Sys.info()
   if (tolower(ssif["sysname"]) == "windows") {
-    s <- strsplit(path.expand("~"), "/")[[1]]
+	pth <- gsub("\\\\", "/", path.expand("~"))
+    s <- strsplit(pth, "/")[[1]]
     check <- TRUE
     check <- check && (s[1] == "C:" || s[1] == "c:")
     check <- check && s[2] == "Users"
