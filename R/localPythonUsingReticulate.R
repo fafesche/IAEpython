@@ -42,7 +42,6 @@ IAE.fn.env.global <- function(full) {
     check <- TRUE
     check <- check && (s[1] == "C:" || s[1] == "c:")
     check <- check && s[2] == "Users"
-	print(s)
     if (check) {
       if (full)
         return(paste0(s[1], paste0("/IAEpython","_",s[3]), "/myEnv"))
@@ -130,6 +129,7 @@ IAE.fn.python <- function(course = '.', spyder = TRUE) {
   # Prepare env by building and check
   print("Check local environment.")
   IAE.env <- IAE.fn.env()
+  print(IAE.env)
   if (!is.null(IAE.env)) {
     print(paste0("     Choose: ", IAE.env))
     # Library for local load
