@@ -186,40 +186,35 @@ IAE.fn.python <- function(course = NULL, spyder = TRUE) {
 #'
 #' Auto-configure for students, installation of necessary packages are done as needed.
 IAE.M1.CCA <- function() {
-  course.type <- list("data","file","FEC")
-  print(IAE.fn.python(course.type))
+  print(IAE.fn.python("M1.CCA"))
 }
 
 #' Configuration for course in Master 1 spécialité AAC
 #'
 #' Auto-configure for students, installation of necessary packages are done as needed.
 IAE.M1.AAC <- function() {
-  course.type <- list("data","file","FEC")
-  print(IAE.fn.python(course.type))
+  print(IAE.fn.python("M1.AAC"))
 }
 
 #' Configuration for course in Master 1 spécialité Finance parcours Conformité
 #'
 #' Auto-configure for students, installation of necessary packages are done as needed.
 IAE.M1.CONFORMITE <- function() {
-  course.type <- list("data","file","FEC")
-  print(IAE.fn.python(course.type))
+  print(IAE.fn.python("M1.CONFORMITE"))
 }
 
 #' Configuration for course in Master 1 spécialité Finance parcours Marchés Financiers
 #'
 #' Auto-configure for students, installation of necessary packages are done as needed.
 IAE.M1.MFI <- function() {
-  course.type <- list("data","file","opt","finance","ts")
-  print(IAE.fn.python(course.type))
+  print(IAE.fn.python("M1.MFI"))
 }
 
 #' Configuration for course in Master 2 Finance spécialités Marchés Financiers
 #'
 #' Auto-configure for students, installation of necessary packages are done as needed.
 IAE.M2.MFI <- function() {
-  course.type <- list("data","file","opt","finance","ts")
-  print(IAE.fn.python(course.type))
+  print(IAE.fn.python("M2.MFI"))
 }
 
 #' Configuration for course for teacher
@@ -233,16 +228,14 @@ IAE.teacher <- function() {
 #'
 #' Auto-configure for students
 IAE.quarto <- function() {
-  course.type <- list()
-  print(IAE.fn.python(course.type, spyder=FALSE))
+  print(IAE.fn.python(".", spyder=FALSE))
 }
 
 #' Configuration foronly launching spyder in the env
 #'
 #' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
 IAE.spyder <- function() {
-  course.type <- list()
-  print(IAE.fn.python(course.type))
+  print(IAE.fn.python('.'))
 }
 
 #' .onLoad .Renviron in case it contains an http_proxy which is not allowed at the IAE
