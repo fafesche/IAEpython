@@ -92,7 +92,7 @@ IAE.fn.pkg_install <- function(name = "", my.env = "") {
 #' @param course An (optional) named argument to check package installation.
 #' @param my.env An optional virtual environment for the python local installation.
 #' @returns None
-IAE.fn.config <- function(course = "ALL.ALL", my.env = "") {
+IAE.fn.config <- function(course = ".", my.env = "") {
   # Load config file
   IAE.base <- IAE.fn.env(full=FALSE)
   config <- read.csv2(paste(IAE.base,"configIAEpython",sep="/"),sep='|',encoding='UTF-8',fileEncoding='UTF-8')
@@ -119,7 +119,7 @@ IAE.fn.config <- function(course = "ALL.ALL", my.env = "") {
 #' @param course An (optional) list of named arguments which are used to check package installation.
 #' @param spyder a boolean to launch or not spyder (default is TRUE)
 #' @returns NULL if the python virtual environment was not accessible otherwise a string containing its path on disk.
-IAE.fn.python <- function(course = NULL, spyder = TRUE) {
+IAE.fn.python <- function(course = '.', spyder = TRUE) {
   # Unload if necessary
   if (isNamespaceLoaded("reticulate")) {
     print("Unload reticulate package for reconfiguration.")
