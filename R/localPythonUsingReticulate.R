@@ -118,7 +118,7 @@ IAE.fn.config <- function(course = "ALL.ALL", my.env = "") {
 #'
 #' @param course An (optional) list of named arguments which are used to check package installation.
 #' @param spyder a boolean to launch or not spyder (default is TRUE)
-#' @returns NULL if the python virtual environment was not accessible otherwise a string containing its path on disk. Should be a path inside AppData of current user.
+#' @returns NULL if the python virtual environment was not accessible otherwise a string containing its path on disk.
 IAE.fn.python <- function(course = NULL, spyder = TRUE) {
   # Unload if necessary
   if (isNamespaceLoaded("reticulate")) {
