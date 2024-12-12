@@ -35,6 +35,7 @@ IAE.fn.env.local <- function(full) {
 #' @param full boolean. TRUE means complete name, FALSE means only main path
 #' @returns Either a string corresponding to a directory or NULL when ~ cannot be extended for a user.
 IAE.fn.env.global <- function(full) {
+  print("Global installation.")
   ssif <- Sys.info()
   if (tolower(ssif["sysname"]) == "windows") {
     s <- strsplit(path.expand("~"), "/")[[1]]
