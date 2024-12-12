@@ -37,12 +37,12 @@ IAE.fn.env.local <- function(full) {
 IAE.fn.env.global <- function(full) {
   print("Global installation.")
   ssif <- Sys.info()
-  print(ssif)
   if (tolower(ssif["sysname"]) == "windows") {
     s <- strsplit(path.expand("~"), "/")[[1]]
     check <- TRUE
     check <- check && (s[1] == "C:" || s[1] == "c:")
     check <- check && s[2] == "Users"
+	print(s)
     if (check) {
       if (full)
         return(paste0(s[1], paste0("/IAEpython","_",s[3]), "/myEnv"))
