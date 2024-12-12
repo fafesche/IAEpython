@@ -7,5 +7,5 @@
 IAE.quarto()
 }
 \description{
-Auto-configure for students in their AppData, installation of necessary packages are done as needed.
+Auto-configure for students
 }

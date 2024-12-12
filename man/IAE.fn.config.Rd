@@ -4,15 +4,15 @@
 \alias{IAE.fn.config}
 \title{Configure python using list of field.}
 \usage{
-IAE.fn.config(course = NULL, my.env = "")
+IAE.fn.config(course = "ALL.ALL", my.env = "")
 }
 \arguments{
-\item{course}{An (optional) list of named arguments which are used to check package installation.}
+\item{course}{An (optional) named argument to check package installation.}
 
 \item{my.env}{An optional virtual environment for the python local installation.}
 }
 \value{
-Currently none formaly but TRUE or FALSE depending on the installation of the spyder package which is mandatory here.
+None
 }
 \description{
 Configure python using list of field.

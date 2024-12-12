@@ -7,5 +7,5 @@
 IAE.M1.CONFORMITE()
 }
 \description{
-Auto-configure for students in their AppData, installation of necessary packages are done as needed.
+Auto-configure for students, installation of necessary packages are done as needed.
 }

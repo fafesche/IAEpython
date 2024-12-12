@@ -12,7 +12,7 @@ IAE.fn.python(course = NULL, spyder = TRUE)
 \item{spyder}{a boolean to launch or not spyder (default is TRUE)}
 }
 \value{
-NULL if the python virtual environment was not accessible otherwise a string containing its path on disk. Should be a path inside AppData of current user.
+NULL if the python virtual environment was not accessible otherwise a string containing its path on disk.
 }
 \description{
 Use python with unload of reticulate and reload after system environment parameters correction. WORK_HOME from reticulate package is used.
