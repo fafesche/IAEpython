@@ -107,7 +107,7 @@ IAE.fn.config <- function(course = "ALL.ALL", my.env = "") {
 	  }
   }
   # Always check spyder
-  # Currently Spyder depends on jellyfish but last version requieres cargo (rust) updates as a dependency
+  # Currently Spyder depends on jellyfish but last version requires cargo (rust) updates as a dependency
   # So jellyfish does not install correctly must switch to an old version before installing spyder
   IAE.fn.pkg_install("jellyfish==1.0.4", my.env = my.env)
   # Then spyder should install correctly
@@ -184,7 +184,7 @@ IAE.fn.python <- function(course = NULL, spyder = TRUE) {
 
 #' Configuration for course in Master 1 spécialité CCA
 #'
-#' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
+#' Auto-configure for students, installation of necessary packages are done as needed.
 IAE.M1.CCA <- function() {
   course.type <- list("data","file","FEC")
   print(IAE.fn.python(course.type))
@@ -192,7 +192,7 @@ IAE.M1.CCA <- function() {
 
 #' Configuration for course in Master 1 spécialité AAC
 #'
-#' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
+#' Auto-configure for students, installation of necessary packages are done as needed.
 IAE.M1.AAC <- function() {
   course.type <- list("data","file","FEC")
   print(IAE.fn.python(course.type))
@@ -200,7 +200,7 @@ IAE.M1.AAC <- function() {
 
 #' Configuration for course in Master 1 spécialité Finance parcours Conformité
 #'
-#' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
+#' Auto-configure for students, installation of necessary packages are done as needed.
 IAE.M1.CONFORMITE <- function() {
   course.type <- list("data","file","FEC")
   print(IAE.fn.python(course.type))
@@ -208,7 +208,7 @@ IAE.M1.CONFORMITE <- function() {
 
 #' Configuration for course in Master 1 spécialité Finance parcours Marchés Financiers
 #'
-#' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
+#' Auto-configure for students, installation of necessary packages are done as needed.
 IAE.M1.MFI <- function() {
   course.type <- list("data","file","opt","finance","ts")
   print(IAE.fn.python(course.type))
@@ -216,7 +216,7 @@ IAE.M1.MFI <- function() {
 
 #' Configuration for course in Master 2 Finance spécialités Marchés Financiers
 #'
-#' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
+#' Auto-configure for students, installation of necessary packages are done as needed.
 IAE.M2.MFI <- function() {
   course.type <- list("data","file","opt","finance","ts")
   print(IAE.fn.python(course.type))
@@ -231,7 +231,7 @@ IAE.teacher <- function() {
 
 #' Configuration without launching spyder for use in quarto
 #'
-#' Auto-configure for students in their AppData, installation of necessary packages are done as needed.
+#' Auto-configure for students
 IAE.quarto <- function() {
   course.type <- list()
   print(IAE.fn.python(course.type, spyder=FALSE))
